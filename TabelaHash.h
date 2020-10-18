@@ -8,6 +8,9 @@ class TabelaHash{
         int tamanho;
         int * tabela;
         int sondagem;
+        int colisoes;
+
+        int getColisoes() { return colisoes;}
 
         int funcHash(int chave){
             return chave % tamanho;
@@ -28,6 +31,7 @@ class TabelaHash{
         TabelaHash(int tam, int sond){
             tamanho = tam;
             tabela = new int[tamanho];
+            colisoes = 0;
 
             for(int i = 0; i<tamanho; i++){
                 tabela[i] = -1;
@@ -62,11 +66,19 @@ class TabelaHash{
                 
             for(int i = 0; i < tamanho; i++){
                
-                int pos = (funcHash(chave)+i) % tamanho;
+                int pos;
+
+                if(sondagem == 1)
+                    pos = linear(chave,i);
+                else
+                    pos = dupla(chave,i);
 
                 if(tabela[pos] == -1){
-                    tabela[funcHash(chave)] = chave;
+                    tabela[pos] = chave;
+                    return;
                 }
+                else
+                    colisoes++;
             }
         }
 };

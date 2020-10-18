@@ -37,6 +37,8 @@ int main(int arg, char * args){
             tabela.add(stoi(data));
         }
 
+        cout<<"colisoes:" << tabela.getColisoes()<<endl;
+
         file.close();
     }
     else{
